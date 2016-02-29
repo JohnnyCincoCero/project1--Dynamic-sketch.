@@ -1,0 +1,68 @@
+
+
+
+//Project 1
+
+float x = 150;
+float y = 150;
+
+void setup() 
+{
+  size (1000,800);
+  smooth();
+  ellipseMode (CENTER);
+
+}
+
+void draw()
+{
+  background (0,200,255);
+  fill (200,255,200);
+  noStroke();
+  rectMode ( CORNERS );
+  rect (0,400, width,height);
+
+  
+ //Sun
+ 
+ fill( 255,255,0 ); // Yellow
+ stroke ( 255,245,102 );
+ ellipse( x,y, 200,200 );
+ x = x + .5;
+ 
+
+ // House on horizon.
+ 
+ fill( 255,0,0 ); // Red
+ noStroke();
+ rect( 100,400, 300,250 ); //House
+ fill( 10,20,255);
+ triangle( 100,250, 300,250, 200,150 ); // Roof
+ fill( 255,220,0); //Windows
+ rectMode ( CENTER );
+ rect( 140,290, 50,45,10 ); //Left window
+ rect( 260,290, 50,45,10 ); //Right window
+ rect( 200,365, 50,70 ); //Front door
+
+ // Tree 
+ 
+ fill( 153,76,0 );
+ rect( 600,500, 50,300 );
+ ellipseMode( CENTER );
+ fill( 0,255,0 );
+ ellipse( 600,300, 150,200 );
+ fill( 255,0,0 );
+ ellipse( 615,255, 25,30 );
+ ellipse( 555,300, 25,30 );
+ ellipse( 630,355, 25,30 );
+
+ // Stewie
+ fill( 0,0,230 ); // Body
+ rect( 900,600, 50,100 );
+ fill( 255,229,204 ); // Head
+ ellipse( 900,525, 150,75 );
+ fill( 255,255,255 ); // Eyes
+ ellipse( 875,515, 25,25 );
+ ellipse( 925,515, 25,25 );
+ arc(900, 544, 25, 25, 0, PI+QUARTER_PI, CHORD);
+}
