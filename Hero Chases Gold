@@ -16,6 +16,12 @@ void setup()
 
 void draw()
 {
+  scene();
+  nugget();
+  action();
+  
+  //scene
+  
   background (0,200,255);
   fill (0,255,150);
   noStroke();
