@@ -1,15 +1,14 @@
-
-
-
 //Project 1
-
-float x = 150;
-float y = 150;
+//Stewie chases gold.
+float sunx = 150;
+float suny = 150;
+float horizon;
 
 void setup() 
 {
   size (1000,800);
-  smooth();
+  horizon = height/3;
+  smooth(2);
   ellipseMode (CENTER);
 
 }
@@ -17,7 +16,7 @@ void setup()
 void draw()
 {
   background (0,200,255);
-  fill (200,255,200);
+  fill (0,255,150);
   noStroke();
   rectMode ( CORNERS );
   rect (0,400, width,height);
@@ -27,8 +26,8 @@ void draw()
  
  fill( 255,255,0 ); // Yellow
  stroke ( 255,245,102 );
- ellipse( x,y, 200,200 );
- x = x + .5;
+ ellipse( sunx,suny, 200,200 );
+ sunx = sunx + .5;
  
 
  // House on horizon.
@@ -59,10 +58,10 @@ void draw()
  // Stewie
  fill( 0,0,230 ); // Body
  rect( 900,600, 50,100 );
- fill( 255,229,204 ); // Head
+ fill( 255,229,150 ); // Head
  ellipse( 900,525, 150,75 );
- fill( 255,255,255 ); // Eyes
+ fill( 200,200,200 ); // Eyes
  ellipse( 875,515, 25,25 );
  ellipse( 925,515, 25,25 );
- arc(900, 544, 25, 25, 0, PI+QUARTER_PI, CHORD);
+ arc(900, 544, 25, 25, 0, PI+QUARTER_PI, CHORD); // Mouth
 }
