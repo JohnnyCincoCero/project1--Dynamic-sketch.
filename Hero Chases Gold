@@ -1,8 +1,13 @@
 //Project 1
 
-float x,y;
+float x, y;
 float sunX = 150;
 float sunY = 150;
+float goldX;
+float goldY;
+float Stewie;
+float horizon;
+int score = 1;
 
 void setup() 
 {
@@ -11,30 +16,41 @@ void setup()
   ellipseMode (CENTER);
   //Frame rate 
   frameRate(30);
+  horizon = height / 2.10;
 }
 
 void draw()
 {
+  scene();
+  sun();
+  house();
+  tree();
+  Stewie();
+  message();
+  gold();
+  quit();
+}
+void scene() {
   background (0, 200, 255);
   fill (200, 255, 200);
   noStroke();
   rectMode ( CORNERS );
   rect (0, 400, width, height);
+}
 
-
-  //Sun
-
-  fill( 255, 255, 0 ); // Yellow
-  stroke ( 255, 245, 102 );
-  strokeWeight (0);
-  ellipse( sunX,sunY, 200, 200 );
+//Sun
+void sun() {
+  fill(250,180,0); 
+  stroke( 255, 245, 102 );
+  strokeWeight (15);
+  ellipse( sunX, sunY, 200, 200 );
   sunX = sunX + .5;
   if (sunX > width) 
     sunX = 0;
+}
 
-
-  // House on horizon.
-
+// House on horizon.
+void house() {
   fill( 255, 0, 0 ); // Red
   noStroke();
   rect( 100, 400, 300, 250 ); //House
@@ -45,9 +61,10 @@ void draw()
   rect( 140, 290, 50, 45, 10 ); //Left window
   rect( 260, 290, 50, 45, 10 ); //Right window
   rect( 200, 365, 50, 70 ); //Front door
+}
 
-  // Tree 
-
+// Tree 
+void tree() {
   fill( 153, 76, 0 );
   rect( 600, 500, 50, 300 );
   ellipseMode( CENTER );
@@ -57,26 +74,26 @@ void draw()
   ellipse( 615, 255, 25, 30 );
   ellipse( 555, 300, 25, 30 );
   ellipse( 630, 355, 25, 30 );
-
-  // Stewie
-  // Body
-  
+}
+// Stewie
+// Body
+void Stewie() {
   fill( 0, 0, 230 );
   rect( mouseX, mouseY, 50, 100 );
-  
+
   // Head
-  
+
   fill( 255, 229, 204 ); 
   ellipse( mouseX, mouseY - 30, 150, 105 );
-  
+
   // Eyes
-  
+
   fill( 255, 255, 255 ); 
   ellipse( mouseX - 19, mouseY - 30, 25, 25 );
   ellipse( mouseX + 19, mouseY - 30, 25, 25 );
 
   //Stewie's legs
-  
+
   stroke(0);
   strokeWeight(4);
   line(mouseX-10, mouseY+50, pmouseX-10, pmouseY+100);
@@ -84,3 +101,37 @@ void draw()
   noStroke();
   arc(mouseX, mouseY, 25, 25, 0, PI+QUARTER_PI, CHORD);
 }
+
+void mousePressed() {
+  goldX = mouseX; 
+  goldY = mouseY;
+}
+  
+void gold() {
+  fill(240,100,15);
+  ellipse(goldX, goldY, 35,35);
+  
+  goldX = goldX + (mouseX + Stewie);
+  goldY = goldY + (mouseY + Stewie);
+}
+  
+//Quit after 50 points
+
+void quit(){
+  if (score == 50 || key == 'q')
+  exit();
+}
+  
+/// MESSAGES
+void message()
+{
+  textSize(22);
+  fill(248, 150, 127);
+  text( "Project 1", width/50, 20 );
+  text( "Stewie Chases Gold", width/20, 45 );
+  fill(0);
+  text( "John Duran", 10, height-10 );
+  textSize(25);
+  fill(0, 255, 100);
+  text(score, 950, 25);
+}  
