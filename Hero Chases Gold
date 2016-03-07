@@ -1,13 +1,16 @@
 //Project 1
 
-float x = 150;
-float y = 150;
+float x,y;
+float sunX = 150;
+float sunY = 150;
 
 void setup() 
 {
   size (1000, 800);
   smooth();
   ellipseMode (CENTER);
+  //Frame rate 
+  frameRate(30);
 }
 
 void draw()
@@ -23,8 +26,11 @@ void draw()
 
   fill( 255, 255, 0 ); // Yellow
   stroke ( 255, 245, 102 );
-  ellipse( x, y, 200, 200 );
-  x = x + .5;
+  strokeWeight (0);
+  ellipse( sunX,sunY, 200, 200 );
+  sunX = sunX + .5;
+  if (sunX > width) 
+    sunX = 0;
 
 
   // House on horizon.
@@ -72,7 +78,9 @@ void draw()
   //Stewie's legs
   
   stroke(0);
-  line(mouseX-10, mouseY+50, pmouseX-10, pmouseY+60);
-  line(mouseX+10, mouseY+50, pmouseX+10, pmouseY+60); 
+  strokeWeight(4);
+  line(mouseX-10, mouseY+50, pmouseX-10, pmouseY+100);
+  line(mouseX+10, mouseY+50, pmouseX+10, pmouseY+100);
+  noStroke();
   arc(mouseX, mouseY, 25, 25, 0, PI+QUARTER_PI, CHORD);
 }
