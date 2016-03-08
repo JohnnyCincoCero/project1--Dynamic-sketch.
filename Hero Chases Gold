@@ -66,12 +66,15 @@ void house() {
 
 // Tree 
 void tree() {
+  //Trunk
   fill( 153, 76, 0 );
   rect( 600, 500, 50, 300 );
+  //Folliage
   ellipseMode( CENTER );
   fill( 0, 255, 0 );
   ellipse( 600, 300, 150, 200 );
   fill( 255, 0, 0 );
+  //Apples
   ellipse( 615, 255, 25, 30 );
   ellipse( 555, 300, 25, 30 );
   ellipse( 630, 355, 25, 30 );
