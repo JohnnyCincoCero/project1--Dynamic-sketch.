@@ -1,4 +1,5 @@
 //Project 1
+//Stewie Chases Gold
 
 float x, y;
 float sunX = 150;
@@ -88,7 +89,7 @@ void Stewie() {
 
   // Eyes
 
-  fill( 255, 255, 255 ); 
+  fill( 180, 180, 185 ); 
   ellipse( mouseX - 19, mouseY - 30, 25, 25 );
   ellipse( mouseX + 19, mouseY - 30, 25, 25 );
 
@@ -108,7 +109,7 @@ void mousePressed() {
 }
   
 void gold() {
-  fill(240,100,15);
+  fill(240,100,200);
   ellipse(goldX, goldY, 35,35);
   
   goldX = goldX + (mouseX + Stewie);
