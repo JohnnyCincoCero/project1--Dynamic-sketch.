@@ -2,11 +2,13 @@
 //Stewie Chases Gold
 
 float x, y;
-float sunX = 150;
-float sunY = 150;
+float sunX = 75;
+float sunY = 75;
 float goldX;
 float goldY;
-float Stewie;
+float stewie;
+float stewieX=200, stewieY=600, dxstewie=3, dystewie=2;
+float pstewieX, pstewieY;
 float horizon;
 int score = 1;
 
@@ -16,7 +18,7 @@ void setup()
   smooth();
   ellipseMode (CENTER);
   //Frame rate 
-  frameRate(30);
+  frameRate(10);
   horizon = height / 2.10;
 }
 
@@ -26,14 +28,16 @@ void draw()
   sun();
   house();
   tree();
-  Stewie();
+  stewie();
   message();
   gold();
   quit();
+  chasegold();
 }
+
 void scene() {
   background (0, 200, 255);
-  fill (200, 255, 200);
+  fill (0, 255, 100);
   noStroke();
   rectMode ( CORNERS );
   rect (0, 400, width, height);
@@ -41,11 +45,11 @@ void scene() {
 
 //Sun
 void sun() {
-  fill(250,180,0); 
+  fill(250, 180, 0); 
   stroke( 255, 245, 102 );
-  strokeWeight (15);
-  ellipse( sunX, sunY, 200, 200 );
-  sunX = sunX + .5;
+  strokeWeight (5);
+  ellipse( sunX, sunY, 100, 100 );
+  sunX = sunX + 7.5;
   if (sunX > width) 
     sunX = 0;
 }
@@ -69,7 +73,7 @@ void tree() {
   //Trunk
   fill( 153, 76, 0 );
   rect( 600, 500, 50, 300 );
-  //Folliage
+  //Folliageq
   ellipseMode( CENTER );
   fill( 0, 255, 0 );
   ellipse( 600, 300, 150, 200 );
@@ -79,54 +83,81 @@ void tree() {
   ellipse( 555, 300, 25, 30 );
   ellipse( 630, 355, 25, 30 );
 }
-// Stewie
-// Body
-void Stewie() {
+  // Stewie
+  
+  // Body
+  
+void stewie() {
+  frameRate (30);
   fill( 0, 0, 230 );
-  rect( mouseX, mouseY, 50, 100 );
+  rect( stewieX, stewieY, 50, 100 );
 
   // Head
 
   fill( 255, 229, 204 ); 
-  ellipse( mouseX, mouseY - 30, 150, 105 );
+  ellipse( stewieX, stewieY - 30, 150, 105 );
 
   // Eyes
 
   fill( 180, 180, 180 ); 
-  ellipse( mouseX - 19, mouseY - 30, 25, 25 );
-  ellipse( mouseX + 19, mouseY - 30, 25, 25 );
+  ellipse( stewieX - 19, stewieY - 30, 25, 25 );
+  ellipse( stewieX + 19, stewieY - 30, 25, 25 );
 
   //Stewie's legs
 
   stroke(0);
   strokeWeight(4);
-  line(mouseX-10, mouseY+50, pmouseX-10, pmouseY+100);
-  line(mouseX+10, mouseY+50, pmouseX+10, pmouseY+100);
+  line(stewieX-10, stewieY+50, stewieX-10, stewieY+100);
+  line(stewieX+10, stewieY+50, stewieX+10, stewieY+100);
   noStroke();
-  arc(mouseX, mouseY, 25, 25, 0, PI+QUARTER_PI, CHORD);
+
+  //Mouth
+
+  arc(stewieX, stewieY, 25, 25, 0, PI+QUARTER_PI, CHORD);
+
+  //Name
+
+  textSize(15);                             
+  fill(255);
+  text("Stewie", stewieX - 20, stewieY + 45);
 }
+
+  //Gold
+
+void gold() {
+  fill(255, 255, 50);
+  ellipse(goldX, goldY, 35, 45);
+}
+
+//Event
 
 void mousePressed() {
-  goldX = mouseX; 
+  goldX = mouseX;
   goldY = mouseY;
 }
-  
-void gold() {
-  fill(240,100,200);
-  ellipse(goldX, goldY, 35,35);
-  
-  goldX = goldX + (mouseX + Stewie);
-  goldY = goldY + (mouseY + Stewie);
-}
-  
-//Quit after 50 points
 
-void quit(){
-  if (score == 50 || key == 'q')
-  exit();
+void chasegold() {
+
+  if (dist (stewieX, stewieY, goldX, goldY) < 100) { 
+
+    goldX = random(0, width);
+    goldY = random(horizon, height);
+    score = score + 1;
+  }
+
+  stewieX =  stewieX  +  (goldX-stewieX) / 60;
+  stewieY =  stewieY  +  (goldY-stewieY) / 60;
 }
-  
+
+//Quit after 10 points
+
+void quit() {
+  if (score == 10 || key == 'q')
+    exit();
+}
+
 /// MESSAGES
+
 void message()
 {
   textSize(22);
@@ -139,5 +170,5 @@ void message()
   fill(0, 255, 100);
   text(score, 950, 25);
   fill(255);
-  text("SCORE =", 840,25);
+  text("SCORE =", 840, 25);
 }  
